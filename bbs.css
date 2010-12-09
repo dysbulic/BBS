@@ -103,3 +103,16 @@ fieldset.post {
   width: 52em;
   margin: 1em auto;
 }
+
+#postlist {
+  width: 52em;
+  margin: 1em auto;
+}
+
+#postlist {
+  text-align: center;
+}
+
+#postlist td:first-child {
+  text-align: left;
+}
