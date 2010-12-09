@@ -29,8 +29,7 @@ $( function() {
 
   // Add classes to theme interface
   $('fieldset').addClass( 'ui-widget-content' );
-  $('input:text, input:password').addClass( 'ui-state-highlight' );
-
+  $('input:text, input:password, textarea').addClass( 'ui-state-highlight ui-corner-all' );
 
   // Theme the error field
   $('#error')

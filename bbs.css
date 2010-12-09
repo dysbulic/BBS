@@ -1,4 +1,4 @@
-html, input {
+html, input, textarea {
   font-family: Helvetica;
   font-size: 13pt;
   background-color: rgb(252,250,245);
@@ -33,7 +33,9 @@ input[type='submit'] {
 
 input[type='text'], input[type='password'] {
   width: 11em;
-  border-radius: 2px;
+}
+
+input[type='text'], input[type='password'], textarea, .wmd-preview {
   padding: .25em .5em;
 }
 
@@ -58,4 +60,41 @@ input[type='text'], input[type='password'] {
   width: 12em;
   margin: 1em auto;
   padding: .5em;
+}
+
+/* Post form styles */
+
+textarea {
+  font-size: 13pt;
+  display: block;
+  width: 50em;
+  height: 15em;
+  margin: .5em auto;
+  clear: both;
+}
+
+legend[for="content"] {
+  display: none;
+  clear: both;
+  padding-bottom: 40px;
+}
+
+legend[for='title'] {
+  width: 3em;
+}
+
+input[name='title'] {
+  width: 47em;
+}
+
+fieldset.post {
+  width: 52em;
+}
+
+.wmd-preview *:first-child {
+  margin-top: .1em;
+}
+
+.wmd-preview *:last-child {
+  margin-bottom: .1em;
 }

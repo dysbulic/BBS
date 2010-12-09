@@ -1,7 +1,5 @@
 <?php
 session_start();
-#include "auth_user.inc.php";
-include "conn.inc.php";
 ?>
 <html>
 <head>
