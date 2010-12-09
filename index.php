@@ -22,16 +22,9 @@ session_start();
         include( 'login_form.php' );
         include( 'registration_form.php' );
       } else {
-        include( 'topic_list.php' )
+        include( 'post_menu.php' );
+        include( 'topic_list.php' );
+      }
     ?>
-      <p>Welcome <?php echo $_SESSION['user']->getName() ?></p>
-      <ul>
-        <li><a href="new_topic.php">New Topic</a></li>
-        <li><a href="view_alltopics.php">View All Topics</a></li>
-        <li><a href="logout.php">Logout</a></li>
-      </ul>
-      <script type="text/javascript">
-      </script>
-    <?php } ?>
   </body>
 </html>
