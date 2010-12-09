@@ -9,7 +9,7 @@ $email = getvar( 'email' );
 $username = getvar( 'username' );
 $password = getvar( 'password' );
 
-if( $name && $username && $password ) {
+if( $username ) {
   if( strlen( $password ) < 6 ) {
     $error = 'Minimum Password Length: 6';
     $formtype = 'registration';
@@ -33,4 +33,7 @@ if( $name && $username && $password ) {
       include( 'index.php' );
     }
   }
+} else {
+  $formtype = 'registration';
+  include( 'index.php' );
 }
