@@ -17,6 +17,7 @@ class Post {
   protected $title;
   protected $content;
   protected $author;
+  protected $parent;
   protected $creationTime;
 
   public function __construct( $title = '',
@@ -52,15 +53,19 @@ class Post {
   public function setAuthor( $author ) {
     if( $author instanceof User ) {
       $this->author = $author;
-    } elseif( is_string( $author ) ) {
+    } else if( is_string( $author ) ) {
       $this->author = User::fromUsername( $author );
     } else {
       throw new Exception( 'Unknown argument type' );
     }
   }
 
+  public function setParent( $parent ) {
+    $this->parent = $parent;
+  }
+
   public function getThread() {
-    return new Thread();
+    return new Thread( $this );
   }
 
   public function getCreationTime() {
@@ -69,6 +74,10 @@ class Post {
 
   public function setCreationTime( $creationTime ) {
     $this->creationTime = $creationTime;
+  }
+
+  public function getId() {
+    return $this->id;
   }
 
   public function getReplies() {
@@ -87,12 +96,12 @@ class Post {
   }
 
   static public function fromId($id) {
-    $result = mysql_magic( 'select id, title, content, author, creation_date from posts where id = ?', $id );
+    $result = mysql_magic( 'select id, title, content, author, creation_date from posts where id = ? limit 1', $id );
     $topic = new Post( $result['title'],
                        $result['content'],
                        $result['author'],
-                       $result['author'] );
-    $topic->setIsNew( false );
+                       $result['id'] );
+    $topic->setCreationTime( $row['creation_date'] );
     return $topic;
   }
   
@@ -111,13 +120,13 @@ class Post {
   }
 
   public function save() {
-    if(is_null($this->id)) {
-      $result = mysql_magic( 'insert into posts (title, content, author) values (?, ?, ?)',
-                             $this->title, $this->content, $this->author->getUsername() );
+    if( is_null( $this->id ) ) {
+      $result = mysql_magic( 'insert into posts (title, content, author, parent) values (?, ?, ?, ?)',
+                             $this->title, $this->content, $this->author->getUsername(), $this->parent );
       $this->id = $result;
     } else {
-      $result = mysql_magic( 'update posts set title = ?, content = ?, author = ? where id = ?',
-                             $this->title, $this->content, $this->author->getUsername(), $this->id );
+      $result = mysql_magic( 'update posts set title = ?, content = ?, author = ?, parent = ? where id = ?',
+                             $this->title, $this->content, $this->author->getUsername(), $this->parent, $this->id );
     }
   }
 }

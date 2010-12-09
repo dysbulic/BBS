@@ -13,12 +13,14 @@ if( !$_SESSION['user'] ) {
 
 $title = getvar( 'title' );
 $content = getvar( 'content' );
+$parent = getvar( 'parent' );
 
 if( $title ) {
-  $newpost = new Post( $title,
+  $post = new Post( $title,
                        $content,
                        $_SESSION['user'] );
-  $newpost->save();
+  $post->setParent( $parent );
+  $post->save();
 }
 
 $isAjax = strcasecmp( getvar( 'reqtype' ), 'ajax' ) == 0;

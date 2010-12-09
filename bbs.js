@@ -62,7 +62,12 @@ $( function() {
     },
   } );
   */
-  $('fieldset.post').hide();
+  if( $('fieldset.post').is( ':visible' ) ) {
+    $('fieldset.post').hide()
+  } else {
+    $('fieldset.post').slideDown()
+  }
+
   $('#postmenu')
    .prepend( $('<li>New Thread</li>')
               .click( function( event ) {
@@ -72,4 +77,6 @@ $( function() {
   // Create post menu
   $('#postmenu li').button();
 
+  // Add reply button
+  
 } )

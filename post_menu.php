@@ -1,6 +1,14 @@
 <?php
   require_once( 'User.php' );
+  require_once( 'Post.php' );
+  require_once( 'util.php' );
+
   session_start();
+
+  try {
+    $parent = Post::fromId( getvar( 'parent' ) );
+  } catch( Exception $e ) {
+  }
 ?>
 
 <ul id="postmenu">
@@ -8,7 +16,15 @@
 </ul>
 <script type="text/javascript"  src="http://box1.wmd-editor.com/1/wmd.js"></script>
 <form action="new_post.php" method="post">
-  <fieldset class="post" title="Add Post">
+  <?php if( isset( $parent ) ) { ?>
+    <?php $title = 'RE:' . $parent->getTitle() ?>
+    <input type="hidden" name="parent" value="<?php print $parent->getId() ?>"/>
+  <?php } ?>
+  <fieldset class="post" title="Add Post"
+    <?php if( isset( $parent ) ) { ?>
+      style="display: none"
+    <?php } ?>
+  >
     <ul>
       <li><legend for="title">Title</legend><input type="text" name="title" value="<?php print $title ?>"/></li>
       <li>

@@ -113,6 +113,6 @@ fieldset.post {
   text-align: center;
 }
 
-#postlist td:first-child {
+#postlist .title {
   text-align: left;
 }
