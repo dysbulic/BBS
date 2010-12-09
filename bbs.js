@@ -14,16 +14,16 @@ $( function() {
   }
   var $loginform = $('fieldset.login');
   var $button = ( $('<a id="logintoggle"/>')
-                  .click( function( event ) {
-                    $loginform.slideToggle( function() {
-                      $button.fadeOut( 'fast', function() {
-                        setLoginButtonText( $button, $loginform );
-                        $button.fadeIn( 'fast' );
-                      } )
-                    } )
-                    $('fieldset.registration').slideToggle();
-                  } )
-                  .button() )
+                   .click( function( event ) {
+                     $loginform.slideToggle( function() {
+                       $button.fadeOut( 'fast', function() {
+                         setLoginButtonText( $button, $loginform );
+                         $button.fadeIn( 'fast' );
+                       } )
+                     } )
+                     $('fieldset.registration').slideToggle();
+                   } )
+                   .button() )
   $loginform.after( $button );
   setLoginButtonText( $button, $loginform )
 
@@ -33,19 +33,43 @@ $( function() {
 
   // Theme the error field
   $('#error')
-    .addClass( 'ui-state-error ui-corner-all' )
-    .prepend( $('<span/>')
-                .addClass( 'ui-icon ui-icon-alert' )
-                .css( {
-                  float : 'left',
-                  'margin-right' : '.3em',
-                } ) )
+   .addClass( 'ui-state-error ui-corner-all' )
+   .prepend( $('<span/>')
+              .addClass( 'ui-icon ui-icon-alert' )
+              .css( {
+                float : 'left',
+                'margin-right' : '.3em',
+              } ) )
 
+  // Theme buttons
   $( 'button, input:submit' ).button();
 
-  $.get( 'posts.xml', function( data ) {
-    console.log(data);
-    console.log(data.documentElement.getAttribute('author'));
-    console.log($(data.documentElement).attr('author'));
+  // Handle the new post dialog
+  //$('form[action="new_post.php"').dialog( {
+  /* Don't do as a dialog because there's a height limit
+  var $postdialog = $('fieldset.post').parent( 'form' ).dialog( {
+    autoOpen : false,
+    height : $('fieldset.post').height(),
+    width : $('fieldset.post').width(),
+    modal : true,
+    buttons : {
+      'New Post' : function( event ) {
+        $('fieldset.post').parent( 'form' ).submit()
+      },
+      Cancel : function( event ) {
+        $(this).dialog( 'close' );
+      },
+    },
   } );
+  */
+  $('fieldset.post').hide();
+  $('#postmenu')
+   .prepend( $('<li>New Thread</li>')
+              .click( function( event ) {
+                $('fieldset.post').slideDown()
+              } ) );
+
+  // Create post menu
+  $('#postmenu li').button();
+
 } )
