@@ -17,6 +17,7 @@ class Post {
   protected $title;
   protected $content;
   protected $author;
+  protected $creationTime;
 
   public function __construct( $title = '',
                                $content = '',
@@ -62,6 +63,29 @@ class Post {
     return new Thread();
   }
 
+  public function getCreationTime() {
+    return $this->creationTime;
+  }
+
+  public function setCreationTime( $creationTime ) {
+    $this->creationTime = $creationTime;
+  }
+
+  public function getReplies() {
+    $result = mysql_magic( 'select id, title, content, author, creation_date from posts where parent = ? order by creation_date',
+                           $this->id );
+    $topics = array();
+    foreach( $result as $row ) {
+      $topic = new Post( $row['title'],
+                         $row['content'],
+                         $row['author'],
+                         $row['id'] );
+      $topic->setCreationTime( $row['creation_date'] );
+      array_push( $topics, $topic );
+    }
+    return $topics;
+  }
+
   static public function fromId($id) {
     $result = mysql_magic( 'select id, title, content, author, creation_date from posts where id = ?', $id );
     $topic = new Post( $result['title'],
@@ -80,6 +104,7 @@ class Post {
                          $row['content'],
                          $row['author'],
                          $row['id'] );
+      $topic->setCreationTime( $row['creation_date'] );
       array_push( $topics, $topic );
     }
     return $topics;
