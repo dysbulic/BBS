@@ -78,5 +78,12 @@ $( function() {
   $('#postmenu li').button();
 
   // Add reply button
-  
+  $('#postlist th.content').hide();
+  $('#postlist td.content').hide();
+  $('#postlist tr').each( function() {
+    var depth = $(this).attr( 'depth' );
+    if( depth > 1 ) {
+      //$(this).hide()
+    }
+  } );
 } )

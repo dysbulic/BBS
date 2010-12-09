@@ -8,6 +8,7 @@ require_once( 'Post.php' );
     <th>Creation Date</th>
     <th>Post Count</th>
     <th>Unread Count</th>
+    <th class="content">Content</th>
   </tr>
   <?php function printPost( $post, $depth = 1 ) { ?>
     <tr depth="<?php print $depth ?>">
@@ -16,13 +17,14 @@ require_once( 'Post.php' );
       <td><?php print date( 'H:i j M Y', $post->getCreationTime() ) ?></td>
       <td><?php print $post->getThread()->getCount() ?></td>
       <td><?php print $post->getThread()->getUnreadCount() ?></td>
+      <td class="content"><?php print $post->getContent() ?></td>
     </tr>
     <?php
       foreach( $post->getReplies() as $child ) {
         printPost( $child, $depth + 1 );
       }
     ?>
-  <?php } ?>  
+  <?php } ?>
   <?php
     foreach( Post::getTopics() as $post ) {
       printPost( $post );

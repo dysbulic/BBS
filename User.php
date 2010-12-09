@@ -22,7 +22,7 @@ class User {
   }
   
   public function setName($name) {
-    $this->name = $name;
+    $this->name = htmlentities( $name );
   }
 
   public function getName() {
@@ -30,7 +30,7 @@ class User {
   }
 
   public function setUsername($username) {
-    $this->username = $username;
+    $this->username = htmlentities( $username );
   }
 
   public function getUsername() {
@@ -38,7 +38,7 @@ class User {
   }
 
   public function setEmail($email) {
-    $this->email = $email;
+    $this->email = htmlentities( $email );
   }
 
   public function getEmail() {

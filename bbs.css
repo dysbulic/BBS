@@ -21,7 +21,7 @@ form ul {
   margin: 0;
 }
 
-form ul, form li {
+form ul {
   list-style: none;
   padding: 0;
 }
@@ -93,6 +93,10 @@ fieldset.post {
 
 .wmd-preview *:first-child {
   margin-top: .1em;
+}
+
+.wmd-preview ul {
+  list-style: disc;
 }
 
 .wmd-preview *:last-child {

@@ -21,6 +21,8 @@ if( $title ) {
                        $_SESSION['user'] );
   $post->setParent( $parent );
   $post->save();
+
+  header( 'Location: index.php' );
 }
 
 $isAjax = strcasecmp( getvar( 'reqtype' ), 'ajax' ) == 0;
