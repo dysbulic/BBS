@@ -37,7 +37,7 @@ input[type='text'], input[type='password'] {
   padding: .25em .5em;
 }
 
-#intro, fieldset {
+#intro, fieldset, #error {
   border-radius: 4px;
   width: 17em;
   margin: auto;
@@ -45,6 +45,17 @@ input[type='text'], input[type='password'] {
 }
 
 #intro {
-  margin: 5em auto 1em;
+  margin: 5em auto;
   text-align: justify;
+}
+
+#intro, #error {
+  margin-bottom: 1em;
+}
+
+#logintoggle {
+  display: block;
+  width: 12em;
+  margin: 1em auto;
+  padding: .5em;
 }

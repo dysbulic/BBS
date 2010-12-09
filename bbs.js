@@ -1,24 +1,46 @@
 $( function() {
-  $('fieldset.registration').hide();
+  // By default show the login form
+  if( $('fieldset.login').is( ':visible' ) ) {
+    $('fieldset.registration').hide()
+  }
+  
+  // Button to alternate between account creation and registration forms
+  function setLoginButtonText( $button, $loginform ) {
+    $button.text(
+      $loginform.is( ':visible' )
+        ? 'Create An Account'
+        : 'Login'
+    );
+  }
+  var $loginform = $('fieldset.login');
+  var $button = ( $('<a id="logintoggle"/>')
+                  .click( function( event ) {
+                    $loginform.slideToggle( function() {
+                      $button.fadeOut( 'fast', function() {
+                        setLoginButtonText( $button, $loginform );
+                        $button.fadeIn( 'fast' );
+                      } )
+                    } )
+                    $('fieldset.registration').slideToggle();
+                  } )
+                  .button() )
+  $loginform.after( $button );
+  setLoginButtonText( $button, $loginform )
+
+  // Add classes to theme interface
   $('fieldset').addClass( 'ui-widget-content' );
   $('input:text, input:password').addClass( 'ui-state-highlight' );
 
-  $( 'fieldset.login' ).after(
-    $('<a class="register">Create An Account</a>').css( {
-      display : 'block',
-      width : '12em',
-      margin : '1em auto',
-    } ).click( function( event ) {
-      $('fieldset.login').slideToggle( function( evt ) {
-        $(event.target).text(
-          $(this).is( ':visible' )
-            ? 'Create An Account'
-            : 'Login'
-        );
-      } );
-      $('fieldset.registration').slideToggle();
-    } )
-  );
 
-  $( 'button, input:submit, a.register' ).button();
+  // Theme the error field
+  $('#error')
+    .addClass( 'ui-state-error ui-corner-all' )
+    .prepend( $('<span/>')
+                .addClass( 'ui-icon ui-icon-alert' )
+                .css( {
+                  float : 'left',
+                  'margin-right' : '.3em',
+                } ) )
+
+  $( 'button, input:submit' ).button();
 } )

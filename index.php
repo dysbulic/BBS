@@ -2,7 +2,7 @@
   "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <?php
-require_once('User.php');
+require_once( 'User.php' );
 session_start();
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,22 +19,28 @@ session_start();
     <?php } ?>
     <?php if( !isset( $_SESSION['user'] ) ) { ?>
       <form action="login.php" method="post">
-        <fieldset class="login">
+        <fieldset class="login"
+          <?php if( $formtype == 'registration' ) { ?>
+            style="display: none"
+          <?php } ?>
+        >
           <ul>
-            <li><legend>Username</legend><input type="text" name="username"/></li>
-            <li><legend>Password</legend><input type="password" name="password" class="ui-state-highlight"/></li>
+            <li><legend>Username</legend><input type="text" name="username" value="<?php print $username ?>"/></li>
+            <li><legend>Password</legend><input type="password" name="password" value="<?php print $password ?>"/></li>
             <li><input type="submit" name="submit" value="Login"/></li>
           </ul>
         </fieldset>
-        <form action="register.php" method="post">
-          <fieldset class="registration">
-            <div><legend>Name</legend><input type="text" name="name" value="<?php print $name ?>"/></div>
-            <div><legend>Username</legend><input type="text" name="username"/></div>
-            <div><legend>Password</legend><input type="password" name="password"></div>
-            <div><legend>E-mail</legend><input type="text" name="email" value="<?php print $email ?>"/></div>
-            <div><input type="submit" name="submit" value="Register"/></div>
-          </fieldset>
-        </form>
+      </form>
+      <form action="register.php" method="post">
+        <fieldset class="registration">
+          <ul>
+            <li><legend>Name</legend><input type="text" name="name" value="<?php print $name ?>"/></li>
+            <li><legend>Username</legend><input type="text" name="username" value="<?php print $username ?>"/></li>
+            <li><legend>Password</legend><input type="password" name="password" value="<?php print $password ?>"></li>
+            <li><legend>E-mail</legend><input type="text" name="email" value="<?php print $email ?>"/></li>
+            <li><input type="submit" name="submit" value="Register"/></li>
+          </ul>
+        </fieldset>
       </form>
     <?php } else { ?>
       <p>Welcome <?php echo $_SESSION['user']->getName() ?></p>
