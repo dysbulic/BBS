@@ -43,4 +43,10 @@ $( function() {
                 } ) )
 
   $( 'button, input:submit' ).button();
+
+  $.get( 'posts.xml', function( data ) {
+    console.log(data);
+    console.log(data.documentElement.getAttribute('author'));
+    console.log($(data.documentElement).attr('author'));
+  } );
 } )

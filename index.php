@@ -17,38 +17,21 @@ session_start();
     <?php if( isset( $error ) ) { ?>
       <div id="error"><?php print $error ?></div>
     <?php } ?>
-    <?php if( !isset( $_SESSION['user'] ) ) { ?>
-      <form action="login.php" method="post">
-        <fieldset class="login"
-          <?php if( $formtype == 'registration' ) { ?>
-            style="display: none"
-          <?php } ?>
-        >
-          <ul>
-            <li><legend>Username</legend><input type="text" name="username" value="<?php print $username ?>"/></li>
-            <li><legend>Password</legend><input type="password" name="password" value="<?php print $password ?>"/></li>
-            <li><input type="submit" name="submit" value="Login"/></li>
-          </ul>
-        </fieldset>
-      </form>
-      <form action="register.php" method="post">
-        <fieldset class="registration">
-          <ul>
-            <li><legend>Name</legend><input type="text" name="name" value="<?php print $name ?>"/></li>
-            <li><legend>Username</legend><input type="text" name="username" value="<?php print $username ?>"/></li>
-            <li><legend>Password</legend><input type="password" name="password" value="<?php print $password ?>"></li>
-            <li><legend>E-mail</legend><input type="text" name="email" value="<?php print $email ?>"/></li>
-            <li><input type="submit" name="submit" value="Register"/></li>
-          </ul>
-        </fieldset>
-      </form>
-    <?php } else { ?>
+    <?php
+      if( !isset( $_SESSION['user'] ) ) {
+        include( 'login_form.php' );
+        include( 'registration_form.php' );
+      } else {
+        include( 'topic_list.php' )
+    ?>
       <p>Welcome <?php echo $_SESSION['user']->getName() ?></p>
       <ul>
         <li><a href="new_topic.php">New Topic</a></li>
         <li><a href="view_alltopics.php">View All Topics</a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
+      <script type="text/javascript">
+      </script>
     <?php } ?>
   </body>
 </html>
