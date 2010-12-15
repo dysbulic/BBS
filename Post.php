@@ -83,7 +83,8 @@ class Post {
   }
 
   public function setParent( $parent ) {
-    if( $parent ) {
+    $parent = intval( $parent );
+    if( $parent > 0 ) {
       $this->parent = $parent;
     } else {
       unset( $this->parent );

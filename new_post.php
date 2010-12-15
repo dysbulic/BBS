@@ -17,8 +17,8 @@ $parent = getvar( 'parent' );
 
 if( $title ) {
   $post = new Post( $title,
-                       $content,
-                       $_SESSION['user'] );
+                    $content,
+                    $_SESSION['user'] );
   $post->setParent( $parent );
   $post->save();
 
